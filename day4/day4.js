@@ -1,4 +1,5 @@
 
+
 const fs = require('fs');
 
 const input = fs.readFileSync('./input4.txt', 'utf-8').split(/\r?\n/)
@@ -14,46 +15,7 @@ const first = () => {
   const mostAsleepedMinute = getMostAsleepedMinute(guards[mostSleepingGuardId])
   console.log(mostAsleepedMinute * mostSleepingGuardId)
 }
-//////////////////////////////////////////////////////////////////////////////////
-const second = () => {
-  const list = formatList(
-    input.sort(
-      (a, b) => new Date(a.substring(1, 17)) - new Date(b.substring(1, 17))
-    )
-  )
-  const guards = betterSleepFormat(list)
-  const minuteFormat = getMinuteFormat(guards)
-  const answ = getMostFrequentlySleepingGuardAndMinute(minuteFormat)
-  console.log(answ)
-}
 
-//////////////////////////////////////////////////////////////////////////////////
-const getMostFrequentlySleepingGuardAndMinute = input => {
-  const max = {
-    minute: undefined,
-    value: 0,
-    id: undefined
-  }
-  Object.keys(input).forEach(k =>
-    Object.keys(input[k]).forEach(e => {
-      if (max.value < input[k][e]) {
-        max.id = k
-        max.minute = e
-        max.value = input[k][e]
-      }
-    })
-  )
-  console.log(max)
-  return max.id * max.minute
-}
-/////////////////////////////////////////////////////////////////////////
-const getMinuteFormat = guards => {
-  const minuteFormat = {}
-  Object.keys(guards).forEach(guardId => {
-    minuteFormat[guardId] = getAsleepedMinutes(guards[guardId])
-  })
-  return minuteFormat
-}
 
 //////////////////////////////////////////////////////////////////////////
 const getAsleepedMinutes = input => {
